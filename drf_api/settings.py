@@ -63,9 +63,12 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     '8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
-    ''
+    'https://pixture-drf-2d68c7f0119f.herokuapp.com/',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io']
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
+    'https://pixture-drf-2d68c7f0119f.herokuapp.com/',
+]
 
 # Application definition
 
