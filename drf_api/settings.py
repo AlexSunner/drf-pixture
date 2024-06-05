@@ -41,7 +41,7 @@ REST_AUTH_SERIALIZERS = {
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 't']
 
 ALLOWED_HOSTS = [
     'pixture-drf-2d68c7f0119f.herokuapp.com',
@@ -172,3 +172,7 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Additional Security Settings
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
