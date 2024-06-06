@@ -3,13 +3,6 @@ from rest_framework.response import Response
 from django.conf import settings
 from datetime import datetime, timezone
 
-@api_view()
-def root_route(request):
-    return Response({
-        "message": "Welcome to my drf API!"
-    })
-
-
 @api_view(['POST'])
 def logout_route(request):
     response = Response()
@@ -34,3 +27,9 @@ def logout_route(request):
         secure=settings.JWT_AUTH_SECURE,
     )
     return response
+
+@api_view()
+def root_route(request):
+    return Response({
+        "message": "Welcome to my drf API!"
+    })
