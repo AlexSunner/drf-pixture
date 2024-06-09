@@ -2,6 +2,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
 from datetime import datetime, timezone
+from .settings import (
+    JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
+    JWT_AUTH_SECURE,
+)
 
 @api_view(['POST'])
 def logout_route(request):
