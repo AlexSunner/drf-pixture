@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+import re
 
 if os.path.exists('env.py'):
     import env
@@ -36,10 +37,10 @@ REST_AUTH_SERIALIZERS = {
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'pixture-drf-2d68c7f0119f.herokuapp.com',
+    os.environ.get('ALLOWED_HOST'),
     '8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
     '127.0.0.1',
 ]
@@ -101,7 +102,7 @@ if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
-    
+
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'drf_api.urls'
