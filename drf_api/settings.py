@@ -46,15 +46,12 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
-# Log ALLOWED_HOSTS to debug
-print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
-print(ALLOWED_HOST)
-
 
 CSRF_TRUSTED_ORIGINS = [
     'https://pixture-drf-2d68c7f0119f.herokuapp.com',
     'https://8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
     'http://127.0.0.1:8000',
+    'https://3000-alexsunner-pixture-tkoyi2jr60a.ws-eu114.gitpod.io',
 ]
 
 INSTALLED_APPS = [
@@ -104,12 +101,20 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 if 'CLIENT_ORIGIN' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = []
 
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://pixture-drf-2d68c7f0119f.herokuapp.com',
+    'https://8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
+    'https://3000-alexsunner-pixture-tkoyi2jr60a.ws-eu114.gitpod.io',
+]
 
 ROOT_URLCONF = 'drf_api.urls'
 
