@@ -39,9 +39,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOST = os.environ.get('ALLOWED_HOST')
 ALLOWED_HOSTS = [
-    ALLOWED_HOST if ALLOWED_HOST else 'default-domain.com',
+    os.environ.get('ALLOWED_HOST'),
     '8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
     '127.0.0.1',
 ]
