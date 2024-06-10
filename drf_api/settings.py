@@ -39,11 +39,17 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
+ALLOWED_HOST = os.environ.get('ALLOWED_HOST')
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
+    ALLOWED_HOST if ALLOWED_HOST else 'default-domain.com',
     '8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
     '127.0.0.1',
 ]
+
+# Log ALLOWED_HOSTS to debug
+print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
+print(ALLOWED_HOST)
+
 
 CSRF_TRUSTED_ORIGINS = [
     'https://pixture-drf-2d68c7f0119f.herokuapp.com',
