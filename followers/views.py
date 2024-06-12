@@ -28,3 +28,14 @@ class FollowerDetail(generics.RetrieveDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
+
+class ProfileFollowersList(generics.ListAPIView):
+    """
+    List all followers for a specific user.
+    """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = FollowerSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Follower.objects.filter(followed_id=user_id)
