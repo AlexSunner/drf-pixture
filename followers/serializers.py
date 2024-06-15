@@ -1,7 +1,7 @@
 from django.db import IntegrityError
 from rest_framework import serializers
 from .models import Follower
-
+from profiles.serializers import ProfileSerializer
 
 class FollowerSerializer(serializers.ModelSerializer):
     """
@@ -9,13 +9,10 @@ class FollowerSerializer(serializers.ModelSerializer):
     Create method handles the unique constraint on 'owner' and 'followed'
     """
     owner = serializers.ReadOnlyField(source='owner.username')
-    followed_name = serializers.ReadOnlyField(source='followed.username')
-
+    followed = ProfileSerializer(read_only=True)
     class Meta:
         model = Follower
-        fields = [
-            'id', 'owner', 'created_at', 'followed', 'followed_name'
-        ]
+        fields = ['id', 'owner', 'created_at', 'followed']
 
     def create(self, validated_data):
         try:
