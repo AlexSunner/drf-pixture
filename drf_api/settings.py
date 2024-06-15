@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'comments',
     'likes',
     'followers',
+    'admin_logs',
 ]
 
 SITE_ID = 1
