@@ -39,14 +39,3 @@ class ProfileFollowersList(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return Follower.objects.filter(followed_id=user_id)
-
-class ProfileFollowingList(generics.ListAPIView):
-    """
-    List all profiles a specific user is following.
-    """
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = FollowerSerializer
-
-    def get_queryset(self):
-        user_id = self.kwargs['user_id']
-        return Follower.objects.filter(owner_id=user_id)
