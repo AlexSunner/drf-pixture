@@ -12,6 +12,7 @@ The live link can be found here - <https://pixture-drf-2d68c7f0119f.herokuapp.co
 - [Database](##database)
 - [Technologies Used](##technologies-used)
 - [Credits](##credits)
+- [Tests](##tests)
 
 ## Features
 
@@ -141,10 +142,11 @@ This log is accessible through the Django admin panel and provides valuable insi
 - Requests-OAuthlib
 - SQLParse
 - ASGIRef
+- The API uses an [ElephantSQL](https://www.elephantsql.com/) database to store data.
 
 ## Credits
 - This project was created as part of my Portfolio Project 5 while following the "Django Rest Framework" walkthrough tutorial. The tutorial provided invaluable guidance and insights into building a robust backend API using Django and Django Rest Framework. A significant portion of the code in this project, including the serializers, settings, and the followers, profiles, posts, likes, and comments apps, is heavily based on or directly taken from the walkthrough tutorial. Special thanks to the tutorial creators for their easy-to-follow instructions.
 
-## Database
-The API uses an [ElephantSQL](https://www.elephantsql.com/) database to store data.
+## Tests
+- I am fully aware that this project currently lacks both manual and automated testing. Due to time constraints, I was unable to implement these tests. Comprehensive testing is crucial for ensuring the reliability and robustness of the application. Future updates will include unit tests, integration tests, and end-to-end tests to enhance the stability and maintainability of the codebase.
 
