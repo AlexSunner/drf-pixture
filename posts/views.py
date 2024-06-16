@@ -4,11 +4,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
-
+from admin_logs.models import AuditLog
 
 class PostList(generics.ListCreateAPIView):
     """
-    List posts or create a post if logged in
+    List posts or create a post if logged in.
     The perform_create method associates the post with the logged in user.
     """
     serializer_class = PostSerializer
@@ -31,7 +31,6 @@ class PostList(generics.ListCreateAPIView):
         'owner__username',
         'title',
     ]
-
     ordering_fields = [
         'likes_count',
         'comments_count',
@@ -39,7 +38,11 @@ class PostList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        post = serializer.save(owner=self.request.user)
+        AuditLog.objects.create(
+            user=self.request.user,
+            action=f"Created a post with title '{post.title}'"
+        )
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
