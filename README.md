@@ -5,14 +5,14 @@ The live link can be found here - <https://pixture-drf-2d68c7f0119f.herokuapp.co
 
 ## Table of Contents
 
-- [Features](##features)
-- [Installation](##installation)
-- [Usage](##usage)
-- [API Endpoints](##api-endpoints)
-- [Database](##database)
-- [Technologies Used](##technologies-used)
-- [Credits](##credits)
-- [Tests](##tests)
+- Features
+- Installation
+- Usage
+- API Endpoints
+- Database
+- Technologies used
+- Credits
+- Tests
 
 ## Features
 
