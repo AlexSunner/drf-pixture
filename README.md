@@ -122,6 +122,9 @@ This log is accessible through the Django admin panel and provides valuable insi
 
 ![Admin log details](https://github.com/AlexSunner/drf-pixture/blob/main/readme_images/adminlogdetails.jpg?raw=true)
 
+Another custom model called Audit Log is implemented to keep track of posts created by users.
+
+![Audit Log](https://github.com/AlexSunner/drf-pixture/blob/main/readme_images/auditlog.jpg?raw=true)
 
 ## Technologies Used
 - Python
@@ -146,13 +149,6 @@ This log is accessible through the Django admin panel and provides valuable insi
 
 ## Credits
 - This project was created as part of my Portfolio Project 5 while following the "Django Rest Framework" walkthrough tutorial. The tutorial provided invaluable guidance and insights into building a robust backend API using Django and Django Rest Framework. A significant portion of the code in this project, including the serializers, settings, and the followers, profiles, posts, likes, and comments apps, is heavily based on or directly taken from the walkthrough tutorial. Special thanks to the tutorial creators for their easy-to-follow instructions.
-
-## Compliance with Assessment Criteria
-
-According to the assessment criteria for this project, I was required to create at least ONE custom model. I have fulfilled this requirement by implementing the custom `Admin Logs` model, which tracks administrative actions with timestamps and detailed logs. This meets the specified criteria, ensuring that the project adheres to the guidelines provided.
-
-I am aware that other students were required to create TWO custom models. I don't know if there is an issue with my LMS content, but I chose to make ONE custom model because that is what it specifies in my LMS. A screenshot is provided below:
-![ONE Custom model](https://github.com/AlexSunner/drf-pixture/blob/main/readme_images/ONEcustom.jpg?raw=true)
 
 ## Acknowledgment
 - I am fully aware that this project currently lacks both manual and automated testing. Due to time constraints, I was unable to implement these tests. Comprehensive testing is crucial for ensuring the reliability and robustness of the application. Future updates will include unit tests, integration tests, and end-to-end tests to enhance the stability and maintainability of the codebase.
