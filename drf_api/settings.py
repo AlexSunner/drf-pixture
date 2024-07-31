@@ -99,6 +99,11 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://3000-alexsunner-pixture-vf7q8i5q164.ws-eu115.gitpod.io",
+    "https://pixture-323686e333c6.herokuapp.com",
+]
+
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.getenv('CLIENT_ORIGIN')
