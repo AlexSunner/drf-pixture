@@ -3,12 +3,12 @@ import os
 import dj_database_url
 import re
 
+# Load environment variables
 if os.path.exists('env.py'):
     import env
 
-
 CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
+    'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
 }
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -37,18 +37,18 @@ REST_AUTH_SERIALIZERS = {
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
-    '8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
+    os.getenv('ALLOWED_HOST'),
+    'localhost',
+    '8000-alexsunner-drfpixture-o1qp4eho6jn.ws-eu115.gitpod.io',
     '127.0.0.1',
 ]
 
-
 CSRF_TRUSTED_ORIGINS = [
     'https://pixture-drf-2d68c7f0119f.herokuapp.com',
-    'https://8000-alexsunner-drfpixture-n6ekftnws1l.ws-eu114.gitpod.io',
+    'https://8000-alexsunner-drfpixture-o1qp4eho6jn.ws-eu115.gitpod.io',
     'http://127.0.0.1:8000',
 ]
 
@@ -101,13 +101,16 @@ AUTHENTICATION_BACKENDS = [
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
+        os.getenv('CLIENT_ORIGIN')
     ]
 if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
+    client_origin_dev = os.getenv('CLIENT_ORIGIN_DEV')
+    match = re.match(r'^.+-', client_origin_dev, re.IGNORECASE)
+    if match:
+        extracted_url = match.group(0)
+        CORS_ALLOWED_ORIGIN_REGEXES = [
+            rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+        ]
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -140,7 +143,7 @@ if 'DEV' in os.environ:
     }
 else:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
     }
 
 AUTH_PASSWORD_VALIDATORS = [
