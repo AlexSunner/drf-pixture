@@ -37,7 +37,7 @@ REST_AUTH_SERIALIZERS = {
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     os.getenv('ALLOWED_HOST'),
@@ -98,6 +98,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://3000-alexsunner-pixture-vf7q8i5q164.ws-eu115.gitpod.io",
