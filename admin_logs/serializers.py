@@ -5,3 +5,4 @@ class AuditLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditLog
         fields = ['id', 'user', 'action', 'timestamp']
+        read_only_fields = ['user']
