@@ -42,13 +42,13 @@ DEBUG = False
 ALLOWED_HOSTS = [
     os.getenv('ALLOWED_HOST'),
     'localhost',
-    '8000-alexsunner-drfpixture-o1qp4eho6jn.ws-eu115.gitpod.io',
+    '8000-alexsunner-drfpixture-dluc279zuep.ws-eu115.gitpod.io',
     '127.0.0.1',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://pixture-drf-2d68c7f0119f.herokuapp.com',
-    'https://8000-alexsunner-drfpixture-o1qp4eho6jn.ws-eu115.gitpod.io',
+    'https://8000-alexsunner-drfpixture-dluc279zuep.ws-eu115.gitpod.io/',
     'http://127.0.0.1:8000',
 ]
 
@@ -90,6 +90,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]

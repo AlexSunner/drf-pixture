@@ -6,7 +6,9 @@ The live link can be found here - <https://pixture-drf-2d68c7f0119f.herokuapp.co
 ## Table of Contents
 
 - Features
+- Deploying / Forking / Cloning
 - Installation
+- Deployment
 - Usage
 - API Endpoints
 - Manual Testing
@@ -25,27 +27,195 @@ The live link can be found here - <https://pixture-drf-2d68c7f0119f.herokuapp.co
 - Admin Panel
 - Custom model "Admin Logs" for tracking admin actions
 
+## Manually Deploying to Heroku
+
+1. Log into Heroku website.
+
+2. From the Dashboard page, select "New" and then "Create new app."
+
+3. Assign a name for the application, select the region and then select "Create app."
+
+4. Select "Deploy" from the submenu at the top. Under the "Deployment method" section, select "GitHub" to connect to GitHub. Under the "Connect to GitHub" section, enter the name of the repository and select "Search." Once the repository is located, select "Connect" to connect the repository to the application within Heroku.
+
+5. Select either "Enable Automatic Deploys" which will deploy a new version of the application every time changes are pushed to GitHub or opt for "Manual Deploy." For this application, "Automatic Deploys" was selected.
+
+6. Once the application is deployed, scroll back to the top of the screen and select "Open app." If "Enable Automatic Deploys" has been selected, the application will be built and available after the next changes are pushed to GitHub.
+
+## Forking the GitHub Repository
+
+If you want to make changes to your repository without affecting it, you can make a copy of it by 'Forking' it. This ensures your original repository remains unchanged.
+
+1. Find the relevant GitHub repository
+2. In the top right corner of the page, click the Fork button (under your account)
+3. Your repository has now been 'Forked' and you have a copy to work on
+
+## Cloning the GitHub Repository
+
+Cloning your repository will allow you to download a local version of the repository to be worked on. Cloning can also be a great way to backup your work.
+
+1. Find the relevant GitHub repository
+2. Press the arrow on the Code button
+3. Copy the link that is shown in the drop-down
+4. Now open Codeanywhere or whatever editor you use & select the directory location where you would like the clone created
+5. In the terminal type 'git clone' & then paste the link you copied in GitHub
+6. Press enter and your local clone will be created.
+
+- Contributions are welcome! Please fork the repository and submit a pull request with your changes. Make sure to follow the project's coding style and include appropriate documentation.
+
 ## Installation
 
-1. Clone the repository:
-   ```
+1. **Clone the Repository:**
+   ```bash
    git clone https://github.com/AlexSunner/drf-pixture.git
+   cd drf-pixture
+   ```
 
-2. Install the required dependencies:
-    ```
-    pip install -r requirements.txt
+2. **Set Up the Virtual Environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-3. Set up the database:
-    ```
-    python3 manage.py migrate
+3. **Install Required Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Create a superuser to access the admin panel:
-    ```
-    python3 manage.py createsuperuser
+4. **Set Up the Database:**
+   ```bash
+   python manage.py migrate
+   ```
 
-5. Run the development server:
+5. **Create a Superuser:**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+6. **Run the Development Server:**
+   ```bash
+   python manage.py runserver
+   ```
+
+## Deployment Instructions
+
+### Back-End (Django) Setup
+
+1. **Cloning the Repository:**
+   - Clone the repository to your local machine:
+     ```bash
+     git clone repository_url
+     ```
+   - Navigate to the project directory:
+     ```bash
+     cd project_directory
+     ```
+
+2. **Setting Up the Django Environment:**
+   - Create and activate a virtual environment:
+     ```bash
+     python -m venv venv
+     source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+     ```
+   - Install required Python packages:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - Create an `env.py` file in the root directory with the following content:
+     ```python
+     import os
+
+     SECRET_KEY = 'your_secret_key'
+     DATABASE_URL = 'your_postgresql_database_url'
+     ALLOWED_HOSTS = 'your_allowed_hosts'
+     DEBUG = False
+     CLOUDINARY_URL = 'your_cloudinary_url'
+     CLIENT_ORIGIN = 'your_client_origin'
+     CLIENT_ORIGIN_DEV = 'your_client_origin_dev'
+     ```
+     Replace placeholders with actual values. Make sure to load these variables in your Django settings.
+
+3. **Deploying to Heroku:**
+   - Install the Heroku Command Line Interface (CLI) if it's not installed.
+   - Log in to your Heroku account:
+     ```bash
+     heroku login
+     ```
+   - Create a new Heroku application:
+     ```bash
+     heroku create app_name
+     ```
+   - Add PostgreSQL as a Heroku add-on:
+     ```bash
+     heroku addons:create heroku-postgresql:hobby-dev
+     ```
+   - Set environment variables on Heroku:
+     ```bash
+     heroku config:set SECRET_KEY=your_secret_key
+     heroku config:set DATABASE_URL=your_postgresql_database_url
+     heroku config:set ALLOWED_HOSTS=your_allowed_hosts
+     heroku config:set CLOUDINARY_URL=your_cloudinary_url
+     heroku config:set CLIENT_ORIGIN=your_client_origin
+     heroku config:set CLIENT_ORIGIN_DEV=your_client_origin_dev
+     ```
+   - Deploy your code to Heroku:
+     ```bash
+     git push heroku main
+     ```
+
+4. **Database Setup:**
+   - Apply database migrations to set up your database schema:
+     ```bash
+     heroku run python manage.py migrate
+     ```
+   - Create an admin user for the Django admin interface:
+     ```bash
+     heroku run python manage.py createsuperuser
+     ```
+
+### Database (ElephantSQL) Configuration
+
+1. **Setting Up ElephantSQL:**
+   - Sign up for an account at [ElephantSQL](https://www.elephantsql.com/).
+   - Create a new PostgreSQL database instance.
+   - Copy the database connection URL provided by ElephantSQL.
+
+2. **Updating Environment Variables:**
+   - Add the ElephantSQL database URL to your `env.py` file:
+     ```python
+     DATABASE_URL = 'your_elephantsql_database_url'
+     ```
+
+### Additional Notes
+
+- **Required Python Packages:**
+  - The `requirements.txt` file includes all necessary packages. Ensure this file is up-to-date with:
+    ```text
+    asgiref==3.8.1
+    cloudinary==1.40.0
+    dj-database-url==0.5.0
+    dj-rest-auth==2.1.9
+    Django==5.0.6
+    django-allauth==64.1.0
+    django-cloudinary-storage==0.3.0
+    django-cors-headers==4.3.1
+    django-filter==24.2
+    djangorestframework==3.15.1
+    djangorestframework-simplejwt==5.3.1
+    gunicorn==22.0.0
+    oauthlib==3.2.2
+    pillow==10.3.0
+    psycopg2==2.9.9
+    psycopg2-binary==2.9.9
+    PyJWT==2.8.0
+    python3-openid==3.2.0
+    pytz==2024.1
+    requests-oauthlib==2.0.0
+    sqlparse==0.5.0
+    whitenoise==6.6.0
     ```
-    python3 manage.py runserver
+
+- **Local Development:**
+  - For local development, ensure you have an `env.py` file with appropriate values for development settings.
 
 ## Usage
 To use the API, you need to have the server running. You can interact with the API using tools like Postman or through the frontend React application.
@@ -596,7 +766,3 @@ Another custom model called Audit Log is implemented to keep track of posts crea
 
 ## Credits
 - This project was created as part of my Portfolio Project 5 while following the "Django Rest Framework" walkthrough tutorial. The tutorial provided invaluable guidance and insights into building a robust backend API using Django and Django Rest Framework. A significant portion of the code in this project, including the serializers, settings, and the followers, profiles, posts, likes, and comments apps, is heavily based on or directly taken from the walkthrough tutorial. Special thanks to the tutorial creators for their easy-to-follow instructions.
-
-## Acknowledgment
-- I am fully aware that this project currently lacks both manual and automated testing. Due to time constraints, I was unable to implement these tests. Comprehensive testing is crucial for ensuring the reliability and robustness of the application. Future updates will include unit tests, integration tests, and end-to-end tests to enhance the stability and maintainability of the codebase.
-
